@@ -3,6 +3,10 @@ server:
 spring:
   cloud:
     gateway:
+      discovery:
+        locator:
+          enabled: true
+          lower-case-service-id: true
       default-filters:
         - name: LogFilter
       routes:
