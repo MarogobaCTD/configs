@@ -19,6 +19,10 @@ spring:
       default-filters:
         - TokenRelay
 #        - name: LogFilter
+      discovery:
+        locator:
+          enabled: true
+          lower-case-service-id: true
       routes:
         - id: catalogRoute
           uri: lb://CATALOG-SERVICE
