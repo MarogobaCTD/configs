@@ -27,7 +27,7 @@ spring:
         - id: movieRoute
           uri: lb://MOVIE-SERVICE
           predicates:
-            - Path=http://localhost:8080/movie-api/**
+            - Path=/movie-api/**
         - id: subscriptionRoute
           uri: lb://SUBSCRIPTION-SERVICE
           predicates:
