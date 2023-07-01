@@ -10,8 +10,8 @@ spring:
           uri: lb://CATALOG-SERVICE
           predicates:
             - Path=/catalog-api/**
-        - id: MOVIE-SERVICE
-          uri: lb://MOVIE-SERVICE
+        - id: movieRoute
+          uri: http://localhost:8091/movie-api
           predicates:
             - Path=/movie-api/**
       discovery:
