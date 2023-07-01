@@ -3,6 +3,9 @@ server:
 spring:
   cloud:
     gateway:
+      discovery:
+        locator:
+          enabled: true
       default-filters:
         - name: LogFilter
       routes:
@@ -14,5 +17,3 @@ spring:
           uri: http://localhost:8091/movie-api
           predicates:
             - Path=/movie-api/**
-      discovery:
-        enabled: true 
