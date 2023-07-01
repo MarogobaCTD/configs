@@ -14,3 +14,5 @@ spring:
           uri: lb://MOVIE-SERVICE
           predicates:
             - Path=/movie-api/**
+      discovery:
+        enabled: true 
