@@ -1,0 +1,43 @@
+server:
+  port: 8080
+spring:
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: https://accounts.google.com
+          jwk-set-uri: https://www.googleapis.com/oauth2/v3/certs
+      client:
+        registration:
+          google:
+            client-id: 391521740994-d5mdid8igvjo8e1pqdk1tsb1ngg39ekl.apps.googleusercontent.com
+            client-secret: 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
+            scope: openid
+            redirect-uri: http://localhost:8080/login/oauth2/code/google        
+  cloud:
+    gateway:
+      default-filters:
+        - TokenRelay
+#        - name: LogFilter
+      routes:
+        - id: catalogRoute
+          uri: lb://CATALOG-SERVICE
+          predicates:
+            - Path=/catalog-api/**
+        - id: movieRoute
+          uri: lb://MOVIE-SERVICE
+          predicates:
+            - Path=/movie-api/**
+        - id: subscriptionRoute
+          uri: lb://SUBSCRIPTION-SERVICE
+          predicates:
+            - Path=/subscription/**
+#          filters:
+#            - name: SubscriptionFilter
+        - id: courseRoute
+          uri: lb://COURSE-SERVICE
+          predicates:
+            - Path=/course/**
+          filters:
+            - AddRequestHeader=course-request-header, custom-course-request-header
+            - AddResponseHeader=course-response-header, custom-course-response-header
