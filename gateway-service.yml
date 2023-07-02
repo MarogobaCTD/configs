@@ -24,6 +24,16 @@ spring:
           enabled: true
           lower-case-service-id: true
       routes:
+        - id: apigateway
+          uri: lb://DIGITAL-BANKING
+          predicates:
+            - Path=/digitalbank/v1/**
+          filters:
+            - name: CircuitBreaker
+              args:
+                name: apigateway
+                fallbackUri: forward:/fallback/usuarioFallback
+              - name:PreFiltroUsuario
         - id: catalogRoute
           uri: lb://CATALOG-SERVICE
           predicates:
